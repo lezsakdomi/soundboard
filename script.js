@@ -72,18 +72,24 @@ $(document).keypress(function(event){
 	}
 });
 
+datadir="data";
 $(document).ready(function(){
-	// clone sound n times
-	e=$('sound#test_sound');
-	for (i=0; i<25; i++)
-		$('#content').append("<sound id=sound_"+i+" hotkey="+String.fromCharCode(97+i)+">"+e.html()+"</sound>");
+	$.ajax(datadir+"/list.tsv", {
+		dataType: 'text'
+	})
+		.done(function(list){
+			list.trim("\n").split("\n").map(function(l){return l.trim("\t").split("\t")}).forEach(function(l){
+				$('#content').append("<sound"+((l[2]!=undefined)?" hotkey=\""+l[2]+"\"":"")+"><img src=\""+datadir+"/"+l[1]+"\" /><audio controls><source src=\""+datadir+"/"+l[0]+"\" /></audio></sound>");
+			});
+		})
+		.always(function(){ // Surely all sounds loaded
+			$('sound[hotkey]').append(function(){
+				return "<hotkey>"+$(this).attr('hotkey')+"</hotkey>";
+			});
 
-	$('sound[hotkey]').append(function(){
-		return "<hotkey>"+$(this).attr('hotkey')+"</hotkey>";
-	});
-
-	$('sound >img').click(function(){
-		replay($(this).parent());
-		select($(this).parent());
-	});
+			$('sound >img').click(function(){
+				replay($(this).parent());
+				select($(this).parent());
+			});
+		});
 });
