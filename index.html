@@ -1,0 +1,36 @@
+<html>
+	<head>
+		<title>Soundboard</title>
+		<meta charset=utf8>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<link rel=stylesheet href="style.css">
+		<script src="script.js"></script>
+	</head>
+	<body>
+		<header>
+			<h1>Soundboard</h1>
+		</header>
+		<container id=content>
+			<sound id=test_sound>
+				<img src="data/test.svg">
+				<audio controls>
+					<source src="data/test.mp3">
+				</audio>
+			</sound>
+		</container>
+		<footer>
+			<h3>Help</h3>
+			<table>
+				<tr><th>Shortcut</th><th>Function</th></tr>
+				<tr><td>*click</td><td>(re)play &amp; select this sound</td></tr>
+				<tr><td>{}</td><td>(re)play this sound</td></tr>
+				<tr><td>Shift+{}</td><td>Select this sound for other actions</td></tr>
+				<tr><td>Ctrl+{}</td><td>Loop tha sound</td></tr>
+				<tr><td>space</td><td>Play/Pause</td></tr>
+				<tr><td>&lt;</td><td>Rewind</td></tr>
+				<tr><td>l</td><td>loop</td></tr>
+			</table>
+			<p>And so on...</p>
+		</footer>
+	</body>
+</html>

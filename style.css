@@ -1,0 +1,41 @@
+sound {
+	width: 10em;
+	height: 10em;
+	display: inline-block;
+	border: 2px solid black;
+	padding: 5px;
+	box-shadow: 2px 2px 3px gray;
+}
+
+sound > img {
+	width: 100%;
+	height: calc(100% - 2em);
+}
+
+sound > audio {
+	width: 100%;
+}
+
+sound[selected] {
+	border-color: orange;
+	color: red;
+}
+
+sound > audio {
+	border: 1px solid transparent;
+}
+sound > audio[loop] {
+	border: 1px solid red;
+}
+
+
+hotkey {
+	background: white;
+	color: black;
+	font-family: monospace;
+	display: inline-block;
+	top: 0;
+	right: 0;
+	z-index: 5;
+	padding: 2px;
+}
