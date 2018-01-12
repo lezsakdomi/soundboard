@@ -23,6 +23,9 @@ function replay(sound){
 function rewind(sound){
 	sound.audio().currentTime=0;
 }
+function seek(sound, amount){
+	sound.audio().currentTime+=amount;
+}
 function playpause(sound){
 	if (sound.audio().paused) sound.audio().play();
 	else sound.audio().pause();
@@ -35,9 +38,32 @@ function loop(sound){ // sets loop
 		sound.audio().loop=false;
 	}
 }
+function incvol(sound, amount){
+	sound.audio().volume+=amount;
+}
 
 $(document).keypress(function(event){
 	switch(event.key) {
+		case 'ArrowUp':
+			incvol(selection, 0.02);
+			event.preventDefault();
+			break;
+
+		case 'ArrowDown':
+			incvol(selection, -0.02);
+			event.preventDefault();
+			break;
+
+		case 'ArrowRight':
+			seek(selection, +1);
+			event.preventDefault();
+			break;
+
+		case 'ArrowLeft':
+			seek(selection, -1);
+			event.preventDefault();
+			break;
+
 		case ' ':
 			playpause(selection);
 			event.preventDefault();
@@ -58,7 +84,6 @@ $(document).keypress(function(event){
 			if (sound.length==1) {
 				event.preventDefault();
 				if (event.key!=event.key.toLowerCase()) {
-					select(sound);
 				} else {
 					if (event.ctrlKey) {
 						loop(sound);
@@ -66,20 +91,21 @@ $(document).keypress(function(event){
 						replay(sound);
 					}
 				}
+				select(sound);
 			} else if (sound.length!=0) {
-				console.log("Multiple sounds for hotkey "+event.key.toLowerCase());
+				console.warn("Multiple sounds for hotkey "+event.key.toLowerCase());
 			}
 	}
+	//console.log(JSON.stringify(event, null, "\t"));
 });
 
-datadir="data";
 $(document).ready(function(){
-	$.ajax(datadir+"/list.tsv", {
+	$.ajax("data/list.tsv", {
 		dataType: 'text'
 	})
 		.done(function(list){
 			list.trim("\n").split("\n").map(function(l){return l.trim("\t").split("\t")}).forEach(function(l){
-				$('#content').append("<sound"+((l[2]!=undefined)?" hotkey=\""+l[2]+"\"":"")+"><img src=\""+datadir+"/"+l[1]+"\" /><audio controls><source src=\""+datadir+"/"+l[0]+"\" /></audio></sound>");
+				$('#content').append("<sound"+((l[2]!=undefined)?" hotkey=\""+l[2]+"\"":"")+"><img src=\""+l[1]+"\" /><audio controls><source src=\""+l[0]+"\" /></audio></sound>");
 			});
 		})
 		.always(function(){ // Surely all sounds loaded
