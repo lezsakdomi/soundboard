@@ -74,7 +74,7 @@ $(document).keypress(function(event){
 			event.preventDefault();
 			break;
 
-		case 'l':
+		case '=':
 			loop(selection);
 			event.preventDefault();
 			break;
