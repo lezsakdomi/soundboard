@@ -1,6 +1,7 @@
 sound {
-	width: 10em;
+	width: 12em;
 	height: 10em;
+	/* margin: 1em; */
 	display: inline-block;
 	border: 2px solid black;
 	padding: 5px;
@@ -10,6 +11,8 @@ sound {
 sound > img {
 	width: 100%;
 	height: calc(100% - 2em);
+	position: relative;
+	z-index: -1;
 }
 
 sound > audio {
@@ -34,9 +37,10 @@ hotkey {
 	color: black;
 	font-family: monospace;
 	display: inline-block;
-	top: 0;
+	top: -100%;
 	right: 0;
 	z-index: 5;
+	position: relative;
 	padding: 2px;
 }
 
