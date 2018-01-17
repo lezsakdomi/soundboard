@@ -50,7 +50,7 @@ function refreshInfo(){
 		var src="";
 		try {
 			var src_comp=selection.audio().currentSrc.split('/');
-			src=src_comp[src_comp.length-1];
+			src=decodeURI(src_comp[src_comp.length-1]);
 		} catch(error) {
 			src=selection.audio().currentSrc;
 		}
