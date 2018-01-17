@@ -39,3 +39,42 @@ hotkey {
 	z-index: 5;
 	padding: 2px;
 }
+
+
+
+details {
+	width: 100%;
+	background: white;
+	position: fixed;
+	left: 0;
+	bottom: 0;
+}
+
+#info-container > * {
+	width: calc(100% - 2*0.5em);
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+	border-left-width: 2px;
+	border-right-width: 2px;
+}
+
+iframe#info {
+	resize: both;
+}
+iframe#info:focus {
+	background-color: yellow;
+}
+
+#info_dragbar {
+	height: 4px;
+	background-color: darkred;
+	border-left-style: solid;
+	border-right-style: solid;
+	cursor: row-resize;
+}
+
+#info_ghostbar {
+	z-index: 999;
+	background-color: rgba(0, 0, 0, 0.5);
+	border-top: 8px solid transparent;
+}
