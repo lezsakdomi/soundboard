@@ -8,6 +8,7 @@ jQuery.fn.extend({
 
 selection=$("<sound></sound>");
 function select(sound){
+	$(document).focus();
 	selection.attr('selected', false);
 	selection=sound;
 	selection.attr('selected', "selected");
