@@ -100,7 +100,7 @@ $(document).keypress(function(event){
 });
 
 $(document).ready(function(){
-	$.ajax("data/list.tsv", {
+	$.ajax("data/index.tsv", {
 		dataType: 'text'
 	})
 		.done(function(list){
