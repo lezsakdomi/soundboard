@@ -1,3 +1,9 @@
+body {
+	background: whitesmoke;
+}
+
+
+
 sound {
 	width: 12em;
 	height: 10em;
@@ -6,6 +12,9 @@ sound {
 	border: 2px solid black;
 	padding: 5px;
 	box-shadow: 2px 2px 3px gray;
+	background-color: whitesmoke;
+	z-index: 0;
+	position: relative;
 }
 
 sound > img {
@@ -81,4 +90,29 @@ iframe#info:focus {
 	z-index: 999;
 	background-color: rgba(0, 0, 0, 0.5);
 	border-top: 8px solid transparent;
+}
+
+
+
+#playerinfo {
+	position: fixed;
+	right: 0px;
+	font-family: monospace;
+	white-space: pre;
+}
+
+
+
+input {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: transparent;
+	text-shadow: 0 0 0 black;
+	border-color: transparent;
+	background: transparent;
+	z-index: -5;
+}
+input:focus {
+	border-color: lightblue;
 }

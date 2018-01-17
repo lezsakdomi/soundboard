@@ -8,10 +8,11 @@ jQuery.fn.extend({
 
 selection=$("<sound></sound>");
 function select(sound){
-	$(document).focus();
+	$('input').focus();
 	selection.attr('selected', false);
 	selection=sound;
 	selection.attr('selected', "selected");
+	refreshInfo();
 }
 
 function play(sound){
@@ -41,6 +42,20 @@ function loop(sound){ // sets loop
 }
 function incvol(sound, amount){
 	sound.audio().volume+=amount;
+}
+
+function refreshInfo(){
+	if (selection.audio()!=undefined) {
+		var d=new Date();
+		var src="";
+		try {
+			var src_comp=selection.audio().currentSrc.split('/');
+			src=src_comp[src_comp.length-1];
+		} catch(error) {
+			src=selection.audio().currentSrc;
+		}
+		$('#playerinfo').html("time=<i>"+selection.audio().currentTime+"</i>\tvol=<u>"+selection.audio().volume+"</u>\tfile=<b>"+src+"</b>\t(on <small>"+('0'+d.getSeconds()).slice(-2)+"."+('00'+d.getMilliseconds()).slice(-3)+"</small>)");
+	}
 }
 
 $(document).keypress(function(event){
@@ -104,6 +119,7 @@ $(document).keypress(function(event){
 			}
 	}
 	//console.log(JSON.stringify(event, null, "\t"));
+	refreshInfo();
 });
 
 $(document).ready(function(){
@@ -123,6 +139,11 @@ $(document).ready(function(){
 			$('sound >img').click(function(){
 				replay($(this).parent());
 				select($(this).parent());
+				console.log("Click handled");
+			});
+			$('sound').contextmenu(function(event){
+				select($(this));
+				event.preventDefault();
 			});
 		});
 
@@ -142,7 +163,9 @@ $(document).ready(function(){
 		$(document).mousemove(function(event){
 			info_ghostbar.css("top", event.pageY);
 			info_ghostbar.css("height", $('#info').offset().top+$('#info').outerHeight() - event.pageY + 4);
+			event.preventDefault();
 		});
+		event.preventDefault();
 	});
 	$(document).mouseup(function(event){
 		if ($('#info').attr('dragging')) {
@@ -150,6 +173,10 @@ $(document).ready(function(){
 			$('#info_ghostbar').remove();
 			$(document).unbind('mousemove');
 			$('#info').attr('dragging', false);
+			event.preventDefault();
 		}
+		refreshInfo();
 	});
+
+	setInterval(refreshInfo, 500);
 });
