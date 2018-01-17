@@ -128,7 +128,7 @@ $(document).ready(function(){
 	})
 		.done(function(list){
 			list.trim("\n").split("\n").map(function(l){return l.trim("\t").split("\t")}).forEach(function(l){
-				$('#content').append("<sound"+((l[2]!=undefined)?" hotkey=\""+l[2]+"\"":"")+"><img src=\""+l[1]+"\" /><audio controls><source src=\""+l[0]+"\" /></audio></sound>");
+				$('#content').append("<sound"+((l[2]!=undefined)?" hotkey=\""+l[2]+"\"":"")+" preload=auto><img src=\""+l[1]+"\" /><audio controls><source src=\""+l[0]+"\" /></audio></sound>");
 			});
 		})
 		.always(function(){ // Surely all sounds loaded
