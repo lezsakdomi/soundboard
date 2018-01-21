@@ -180,3 +180,13 @@ $(document).ready(function(){
 
 	setInterval(refreshInfo, 500);
 });
+
+$(document).ready(function(){
+	var iframeLoaded=false;
+	$('details').on('toggle', function(event){
+		if ($('details').prop('open') && !iframeLoaded) {
+			$('#info').attr('src', "info/index.html");
+			iframeLoaded=true;
+		}
+	});
+});
